@@ -31,6 +31,8 @@ def apply_theme():
 
  
 def clear_screen():
+    main_window.unbind_all("<MouseWheel>")  
+
     for widget in main_window.winfo_children():
         widget.destroy()
     apply_theme()

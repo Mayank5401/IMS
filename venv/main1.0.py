@@ -24,6 +24,7 @@ def toggle_theme():
     apply_theme()
 
 def apply_theme():
+  
     main_window.configure(bg=bg_color)
     for widget in main_window.winfo_children():
         try:
@@ -33,6 +34,8 @@ def apply_theme():
 
  
 def clear_screen():
+    main_window.unbind_all("<MouseWheel>")  
+
     for widget in main_window.winfo_children():
         widget.destroy()
     apply_theme()
@@ -517,7 +520,7 @@ def main_menu():
         tk.Button(inner_frame, text=text, command=command, font=("Arial", 12), width=20, height=2, bg="#007acc", fg=fg_color).pack(pady=5, anchor="center")
 
     # Enable mouse scrolling
-    canvas.bind_all("<MouseWheel>", lambda event: canvas.yview_scroll(-1 * (event.delta // 120), "units"))
+    canvas.bind_all("<MouseWheel>", lambda event: canvas.yview_scroll(-1 * (event.delta // 120), "units") if scrollable_frame.winfo_exists() else None)
 
 def sales_dashboard_ui():
     clear_screen()
